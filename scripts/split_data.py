@@ -8,8 +8,9 @@ import os
 Splits a data file into test, training, and validation sets of specified size.
 '''
 
+target_filename = 'small'
+
 target_directory = '../resources/run_1'
-target_filename = 'full'
 target_file = target_filename + '.csv'
 
 test_fraction = 0.25
@@ -20,8 +21,13 @@ random_seed = 42
 def getData(name):
     data = np.genfromtxt(name, delimiter=',')
     # Returns column matrices
-    X = data[:,0:-1]
-    Y = data[:,-1]
+
+    # filter data to remove points which were in collision.
+    # for these points, at least one sensor reading will be zero.
+    filtered_data = np.array(filter(lambda x: min(x[0:-1])>0, data))
+
+    X = filtered_data[:,0:-1]
+    Y = filtered_data[:,-1]
     return X, Y
 
 X, Y = getData(os.path.join(target_directory, target_file))
@@ -42,7 +48,7 @@ np.savetxt(os.path.join(target_directory, target_filename + "_trainX.csv"), X_tr
 np.savetxt(os.path.join(target_directory, target_filename + "_trainY.csv"), Y_train, delimiter=",")
 np.savetxt(os.path.join(target_directory, target_filename + "_testX.csv"), X_test, delimiter=",")
 np.savetxt(os.path.join(target_directory, target_filename + "_testY.csv"), Y_test, delimiter=",")
-np.savetxt(os.path.join(target_directory, target_filename + "_validationY.csv"), X_validation, delimiter=",")
+np.savetxt(os.path.join(target_directory, target_filename + "_validationX.csv"), X_validation, delimiter=",")
 np.savetxt(os.path.join(target_directory, target_filename + "_validationY.csv"), Y_validation, delimiter=",")
 
 print('Export complete.')
