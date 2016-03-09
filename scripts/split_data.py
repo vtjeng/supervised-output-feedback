@@ -1,5 +1,3 @@
-__author__ = 'peteflorence'
-
 import numpy as np
 import sklearn.cross_validation
 import os
@@ -10,7 +8,7 @@ Splits a data file into test, training, and validation sets of specified size.
 
 target_filename = 'small'
 
-target_directory = '../resources/run_1'
+target_directory = '../resources/run_2'
 target_file = target_filename + '.csv'
 
 test_fraction = 0.25
@@ -20,7 +18,6 @@ random_seed = 42
 
 def getData(name):
     data = np.genfromtxt(name, delimiter=',')
-    # Returns column matrices
 
     # filter data to remove points which were in collision.
     # for these points, at least one sensor reading will be zero.
