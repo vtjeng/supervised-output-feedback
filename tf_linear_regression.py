@@ -34,7 +34,7 @@ sess.run(init)
 
 # Fit the line.
 for step in xrange(1000):
-    
+
     sess.run(train_step, feed_dict = {x: X_subsample, y_: Y_subsample}) # training on the full dataset
     if step % 2 == 0:
         print(step, np.transpose(sess.run(W)))
