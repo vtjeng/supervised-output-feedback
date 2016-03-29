@@ -8,7 +8,7 @@ Splits a data file into test, training, and validation sets of specified size.
 
 target_filename = 'small'
 
-target_directory = '../resources/run_2'
+target_directory = '../resources/run_3'
 target_file = target_filename + '.csv'
 
 test_fraction = 0.25
